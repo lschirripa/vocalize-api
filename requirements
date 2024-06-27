@@ -1,0 +1,7 @@
+pydub
+sounddevice
+scipy
+openai
+fastapi
+uvicorn
+pyttsx3
