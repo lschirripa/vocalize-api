@@ -3,6 +3,8 @@ from scipy.io.wavfile import write
 from pydub import AudioSegment
 from openai import OpenAI
 import pyttsx3
+import time
+import pygame
 
 client = OpenAI()
 
@@ -111,7 +113,15 @@ class VocalizeService:
         response = client.audio.speech.create(
             model="tts-1",
             voice="alloy",
-            input="Today is a wonderful day to build something people love!"
+            input=text
         )
 
         response.stream_to_file(speech_file_path)
+        self.reproduce_voice()
+
+    def reproduce_voice(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load("speech.mp3")
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy():
+            time.sleep(1)
