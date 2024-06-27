@@ -52,7 +52,7 @@ class VocalizeService:
         return transcript
 
     def generate_corrected_transcript(self) -> str:
-        system_prompt = "You are a helpful assistant. Your task is to correct any spelling discrepancies in the transcribed text."
+        system_prompt = "You are a helpful assistant. Your task is to correct any spelling discrepancies in the transcribed text. The output should be the text corrected. Return the same text if there were no errors"
         audio_file = open("output.mp3", "rb")
         temperature = 0
 
