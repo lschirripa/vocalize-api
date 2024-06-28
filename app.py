@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Any
-from fastapi import APIRouter, Depends, HTTPException, status
-
+from fastapi import APIRouter, Depends
 from service import VocalizeService
 
 app = FastAPI()
@@ -18,22 +17,13 @@ class Data(BaseModel):
     payload: Any
 
 
-@app.get("/test")
-async def read_items(service: VocalizeService = Depends(get_service)):
-    return "a"
-
-
 @app.post("/create-transcription")
-async def create_transcription(duration: int, service: VocalizeService = Depends(get_service)):
+async def speech_to_text(duration: int, service: VocalizeService = Depends(get_service)):
     return service.create_transcription(duration)
 
-@app.post("/create-voice")
-async def create_voice(text: str, service: VocalizeService = Depends(get_service)):
-    return service.speak(text)
-
-@app.post("/create-voice-openai")
-async def create_voice(text: str, service: VocalizeService = Depends(get_service)):
-    return service.create_voice(text)
+@app.post("/create-speech")
+async def text_to_speech(text: str, service: VocalizeService = Depends(get_service)):
+    return service.text_to_speech(text)
 
 
 if __name__ == "__main__":
