@@ -1,6 +1,4 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
-from typing import Any
 from fastapi import APIRouter, Depends
 from service import VocalizeService
 
@@ -11,10 +9,6 @@ app.include_router(router)
 
 def get_service() -> VocalizeService:
     return VocalizeService()
-
-
-class Data(BaseModel):
-    payload: Any
 
 
 @app.post("/create-transcription")
@@ -30,4 +24,3 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
-# 192.168.1.40:8000
