@@ -4,5 +4,4 @@ scipy
 openai
 fastapi
 uvicorn
-pyttsx3
 pygame
